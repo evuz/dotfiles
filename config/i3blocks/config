@@ -1,0 +1,59 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=~/.config/i3blocks/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+color=#f3f4f5
+
+[docker]
+command=echo -n " "; ~/.config/i3blocks/docker/docker | grep -E -o '[0-9]'
+interval=10
+
+[iface]
+command=echo -n " "; ~/.config/i3blocks/iface/iface
+#LABEL=wlan0:
+#IFACE=wlan0
+#ADDRESS_FAMILY=inet6?
+interval=10
+
+[cpu_usage]
+command=echo -n " "; ~/.config/i3blocks/cpu_usage/cpu_usage | grep -E -o '[0-9]+.[0-9]?%'
+interval=5
+LABEL=CPU 
+
+[ram]
+command=echo -n " "; ~/.config/i3blocks/memory/memory | grep -E -o '[0-9]+.[0-9]?G'
+interval=30
+
+[disk-home]
+command=echo -n " "; df -h -P -l "$HOME" | awk '/\/.*/ { print $3; exit 0 }'
+interval=30
+
+[time]
+command=echo -n " "; date '+%a, %d %b %H:%M  '
+interval=5
